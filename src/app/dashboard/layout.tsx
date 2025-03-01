@@ -6,8 +6,12 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import {
-  Menu, X, Cloud, MessageSquare, BookOpen, Image as ImageIcon,
-  ShoppingBag, Home, ChevronLeft, ChevronRight, Wheat, HistoryIcon
+  Menu, X, MessageSquare,
+   Home, ChevronLeft, ChevronRight, Wheat, HistoryIcon,
+  Gamepad2,
+  UserRoundPen,
+  Medal,
+  Brain
 } from "lucide-react"
 import NavbarProfile from "@/components/NavbarProfile"
 
@@ -31,33 +35,29 @@ export default function Component({ children }: { children: React.ReactNode }) {
     <nav className="space-y-2 flex flex-col h-full justify-between items-start">
       <div>
         <Link href="/dashboard" className="flex items-center space-x-2 px-4 py-2 rounded-lg" onClick={handleLinkClick}>
-          <Home className="h-5 w-5" />
+          <Home className="h-5 w-5 text-primary" />
           <span>Home</span>
         </Link>
         <Link href="/dashboard/profile" className="flex items-center space-x-2 px-4 py-2 rounded-lg" onClick={handleLinkClick}>
-          <Cloud className="h-5 w-5" />
+          <UserRoundPen  className="h-5 w-5 text-primary" />
           <span>Profile</span>
         </Link>
         <Link href="/dashboard/ai-chat" className="flex items-center space-x-2 px-4 py-2 rounded-lg" onClick={handleLinkClick}>
-          <MessageSquare className="h-5 w-5" />
-          <span>AI Chat</span>
+          <MessageSquare className="h-5 w-5 text-primary" />
+          <span>AI Hand</span>
         </Link>
         <Link href="/dashboard/games" className="flex items-center space-x-2 px-4 py-2 rounded-lg" onClick={handleLinkClick}>
-          <BookOpen className="h-5 w-5" />
+          <Gamepad2  className="h-5 w-5 text-primary" />
           <span>Games</span>
         </Link>
         <Link href="/dashboard/leaderboard" className="flex items-center space-x-2 px-4 py-2 rounded-lg" onClick={handleLinkClick}>
-          <ImageIcon className="h-5 w-5" />
+          <Medal  className="h-5 w-5 text-primary" />
           <span>Leadrbord</span>
-        </Link>
-        <Link href="/dashboard/marketplace" className="flex items-center space-x-2 px-4 py-2 rounded-lg" onClick={handleLinkClick}>
-          <ShoppingBag className="h-5 w-5" />
-          <span>Marketplace</span>
         </Link>
       </div>
       <div className="flex items-start">
         <div className="flex items-center space-x-2 px-4 py-2 rounded-lg" onClick={handleLinkClick}>
-          <HistoryIcon className="h-5" />
+          <HistoryIcon className="h-5 text-primary" />
           <span>History</span>
         </div>
       </div>
@@ -68,8 +68,7 @@ export default function Component({ children }: { children: React.ReactNode }) {
       <header className="flex items-center justify-between p-2 border-b">
         <div className="flex gap-10">
           <Link href="/dashboard" className="flex items-center space-x-2">
-            <Wheat className="h-6 w-6" />
-            <span className="text-xl font-bold">Krishi</span>
+          <span className="text-2xl font-bold text-primary flex gap-1 items-center"><Brain /> Quizz</span>
           </Link>
           {isLargeScreen && (
             <Button

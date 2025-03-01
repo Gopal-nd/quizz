@@ -55,6 +55,7 @@ model User {
   sessions      Session[]
   conversations Conversation[]
   marketplaceItems MarketplaceItem[]
+    quizes             Quizes[]  
 }
 
 model Conversation {
@@ -86,4 +87,15 @@ model MarketplaceItem {
   userId               String
   user                 User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt            DateTime  @default(now())
+}
+
+model Quizes {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  gameType   String   // e.g., "quiz", "puzzle", etc.
+  attempted  Int
+  score      Int
+  percentage Float?   // e.g., score/attempted * 100
+  createdAt  DateTime @default(now())
 }

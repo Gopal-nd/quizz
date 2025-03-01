@@ -1,72 +1,73 @@
 'use client'
+
+import { motion } from 'framer-motion'
+import { ChevronRight } from 'lucide-react'
 import { useSession } from 'next-auth/react'
-import Link from 'next/link'
-import React,{ FC } from 'react'
+import { useRouter } from 'next/navigation'
+import React, { FC } from 'react'
 
-interface pageProps {
-  
+interface PageProps {}
+
+const Page: FC<PageProps> = ({}) => {
+  const { data: user } = useSession()
+  const router = useRouter()
+
+  if (!user) return <div>Unauthorized</div>
+
+  const handleCategoryClick = (category: string) => {
+    router.push(`/dashboard/category/${category}`)
+  }
+
+  return (
+    <div className="space-y-4">
+      <h2 className="text-center font-bold text-2xl">
+        Welcome <span className="text-primary">{user?.user?.name}</span>
+      </h2>
+      <div className="flex flex-col items-center space-y-10 min-h-screen">
+        <motion.div
+          className="space-y-6 w-full"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <h3 className="text-xl font-bold text-center mb-6">Select a Quizz Topic</h3>
+          <div className="grid md:grid-cols-2 grid-rows-4 gap-4">
+            <TopicCard title="Physics" color="bg-purple-100 hover:bg-purple-200" textColor="text-purple-700" onClick={() => handleCategoryClick('physics')} />
+            <TopicCard title="Biology" color="bg-green-100 hover:bg-green-200" textColor="text-green-700" onClick={() => handleCategoryClick('biology')} />
+            <TopicCard title="History" color="bg-amber-100 hover:bg-amber-200" textColor="text-amber-700" onClick={() => handleCategoryClick('history')} />
+            <TopicCard title="Chemistry" color="bg-blue-100 hover:bg-blue-200" textColor="text-blue-700" onClick={() => handleCategoryClick('chemistry')} />
+          {/* <div className="flex justify-end">
+            <button className="bg-green-500 px-4 py-2 rounded-md hover:bg-green-600 transition-colors flex items-center">
+              Continue
+              <ChevronRight className="ml-1 w-4 h-4" />
+            </button>
+          </div> */}
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  )
 }
 
-const page: FC<pageProps> = ({}) => {
-  const user = useSession()
-  if(!user) return <div>Unauthorized</div>
-  return (<>
-    <div className="space-y-4 ">
-      <h2 className='text-center font-bold text-2xl'>Welcome <span className='text-blue-500'>{user.data?.user.name}</span></h2>
-      <div className="flex flex-col items-center justify-center space-y-10 min-h-screen ">
-      {/* Hero Section */}
-      <div className="text-center p-10 w-full">
-        <h1 className="text-4xl font-bold">Get Ready to Revolutionalize Agriculture.</h1>
-        <p className="mt-4 text-lg">
-          Leveraging technology to achieve Zero Hunger and sustainable growth.
-        </p>
-      </div>
+export default Page;
 
-      {/* Features Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-6">
-        {/* Feature: Weather Information */}
-        <FeatureCard
-          title="Weather Information"
-          description="Real-time updates and personalized recommendations."
-          link="/dashboard/weather"
-        />
-        {/* Feature: Agricultural Marketplace */}
-        <FeatureCard
-          title="Agricultural Marketplace"
-          description="Direct farmer-buyer connections."
-          link="/dashboard/marketplace"
-        />
-
-        {/* Feature: Pest and Disease Detection */}
-        <FeatureCard
-          title="Pest and Disease Detection"
-          description="Using advanced image recognition."
-          link="/dashboard/image-recognition"
-        />
-
-        {/* Feature: Training and Awareness */}
-        <FeatureCard
-          title="Training and Awareness"
-          description="Knowledge dissemination for farmers."
-          link="/dashboard/tutorial"
-        />
-        
-      </div>
-
-    
-    </div>
-    </div>
-  </>)
+interface TopicCardProps {
+  title: string;
+  color: string;
+  textColor: string;
+  onClick: () => void;
 }
 
-export default page;
-
-const FeatureCard = ({ title, description, link }: { title: string; description: string; link: string }) => (
-  <div className="border rounded-lg shadow-lg p-6 text-center">
-    <h3 className="text-xl font-semibold mb-4">{title}</h3>
-    <p className="text-gray-600 mb-6">{description}</p>
-    <Link href={link}>
-      <p className="px-4 py-2 border">Get started</p>
-    </Link>
-  </div>
-)
+const TopicCard: FC<TopicCardProps> = ({ title, color, textColor, onClick }) => {
+  return (
+    <motion.div
+      className={`p-4 rounded-lg cursor-pointer transition-colors ${color}`}
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
+      onClick={onClick}
+    >
+      <p className={`font-medium ${textColor}`}>{title}</p>
+    </motion.div>
+  )
+}

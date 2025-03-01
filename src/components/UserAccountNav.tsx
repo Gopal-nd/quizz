@@ -29,10 +29,7 @@ const UserAccounNav: FC<UserAccounNavProps> = ({ user }) => {
             </div>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href={`/dashboard/details`}>My Listings</Link>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
+
         <DropdownMenuItem onSelect={(event)=>{
             event.preventDefault()
             signOut({

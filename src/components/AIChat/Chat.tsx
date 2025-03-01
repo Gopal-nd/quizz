@@ -50,7 +50,7 @@ const Chat: React.FC = () => {
         },
         {
           role: 'model',
-          parts: [{ text: 'Great to meet you. How can I assist you with your crops?' }],
+          parts: [{ text: 'How answer quizz questions' }],
         },
       ],
     })
@@ -84,7 +84,7 @@ const Chat: React.FC = () => {
   return (
     <Card className="w-full mx-auto h-[90vh] flex flex-col">
       <CardHeader>
-        <CardTitle>Chat with Crop Assistant</CardTitle>
+        <CardTitle>Quizz Assistent</CardTitle>
       </CardHeader>
       <CardContent className="flex-grow overflow-hidden">
         <ScrollArea className="h-full pr-4" ref={scrollAreaRef}>

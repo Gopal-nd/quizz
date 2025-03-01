@@ -36,15 +36,15 @@ const Leaderboard = () => {
         <motion.ul 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="max-w-xl mx-auto space-y-4"
+          className="max-w-xl mx-auto space-y-2"
         >
-          {leaderboard.map((user) => (
+          {leaderboard.map((user,index) => (
             <motion.li 
               key={user.userId}
-              className="p-4  rounded shadow flex justify-between items-center"
+              className="p-4  rounded-lg shadow flex justify-between items-center"
               whileHover={{ scale: 1.02 }}
             >
-              <div className="flex items-center space-x-3">
+              {/* <div className="flex items-center space-x-3">
                 <p className='text-xl'>#{user.rank}</p>
                 {user.image && (
                   <img src={user.image} alt={user.name} className="w-10 h-10 rounded-full" />
@@ -53,7 +53,16 @@ const Leaderboard = () => {
                    {user.name}
                 </span>
               </div>
-              <span className="text-gray-600">Score: {user.totalScore}</span>
+              <span className="text-gray-600">Score: {user.totalScore}</span> */}
+               <div key={index} className="flex items-center w-full justify-between ">
+                  <div className="flex items-center">
+                    <div className="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-amber-100 text-amber-800">
+                      {user.rank}
+                    </div>
+                    <span className="font-medium">{user.name}</span>
+                  </div>
+                  <span className="text-sm font-semibold text-amber-600">{user.totalScore} pts</span>
+                </div>
             </motion.li>
           ))}
         </motion.ul>

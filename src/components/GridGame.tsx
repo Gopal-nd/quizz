@@ -76,7 +76,7 @@ const MemoryGame: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-6">
+    <div className="flex flex-col items-center p-6 max-w-sm">
       <h1 className="text-2xl font-bold mb-4"> Memory Game</h1>
       <div className="grid grid-cols-4 gap-4">
         {cards.map((card, index) => (

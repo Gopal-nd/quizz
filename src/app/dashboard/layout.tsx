@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { Badge } from "@/components/ui/badge";
 import { useMediaQuery } from "react-responsive"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -14,6 +15,8 @@ import {
   Brain
 } from "lucide-react"
 import NavbarProfile from "@/components/NavbarProfile"
+import { signOut } from "next-auth/react";
+import ChatSupport from "@/components/chat";
 
 export default function Component({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -44,7 +47,7 @@ export default function Component({ children }: { children: React.ReactNode }) {
         </Link>
         <Link href="/dashboard/ai-chat" className="flex items-center space-x-2 px-4 py-2 rounded-lg" onClick={handleLinkClick}>
           <MessageSquare className="h-5 w-5 text-primary" />
-          <span>AI Quiz</span>
+          <span>AI Quiz</span><Badge>new</Badge>
         </Link>
         <Link href="/dashboard/games" className="flex items-center space-x-2 px-4 py-2 rounded-lg" onClick={handleLinkClick}>
           <Gamepad2  className="h-5 w-5 text-primary" />
@@ -56,10 +59,14 @@ export default function Component({ children }: { children: React.ReactNode }) {
         </Link>
       </div>
       <div className="flex items-start">
-        <div className="flex items-center space-x-2 px-4 py-2 rounded-lg" onClick={handleLinkClick}>
-          <HistoryIcon className="h-5 text-primary" />
-          <span>History</span>
-        </div>
+      <Button onClick={(event)=>{
+            event.preventDefault()
+            signOut({
+                callbackUrl: `${window.location.origin}/sign-in`
+            })
+        }} className="cursor-pointer">
+          Sign out
+        </Button>
       </div>
     </nav>
   )
@@ -108,6 +115,7 @@ export default function Component({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </div>
+      <ChatSupport />
     </div>
   )
 }

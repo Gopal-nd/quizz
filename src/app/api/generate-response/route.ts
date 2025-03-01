@@ -1,8 +1,12 @@
 // /app/api/generate-response/route.ts
 import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+export const dynamic = 'force-dynamic';
 
-export async function POST(req: Request) {
+import type { NextRequest } from 'next/server';
+
+
+export async function POST(req: NextRequest) {
   try {
     const { title, description, inputValue } = await req.json();
 

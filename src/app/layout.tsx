@@ -5,6 +5,9 @@ import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/toaster"
 import { SessionProvider } from "next-auth/react";
 import Providers from "./providers";
+
+export const fetchCache = 'force-no-store';
+export const dynamic = 'force-dynamic';
  
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

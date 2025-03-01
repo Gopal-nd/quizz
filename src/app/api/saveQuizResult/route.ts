@@ -2,8 +2,10 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { getAuthSession } from '@/lib/auth';
+import type { NextRequest } from 'next/server';
 
-export async function POST(request: Request) {
+
+export async function POST(request: NextRequest) {
   try {
     const session = await getAuthSession();
     if (!session?.user?.email) {

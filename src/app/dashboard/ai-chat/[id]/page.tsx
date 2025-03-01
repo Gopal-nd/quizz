@@ -40,8 +40,9 @@ const QuizPage = ({ params }: { params: { id: string } }) => {
           };
           const res = await fetch('/api/generate-response', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json' , 'Pragma': 'no-cache'},
             body: JSON.stringify(body),
+ cache: 'no-store'
           });
           const data = await res.json();
 

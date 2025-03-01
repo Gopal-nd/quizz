@@ -62,7 +62,8 @@ const QuizPage = ({ params }: { params: { id: string } }) => {
       // Call the server action directly
       fetch('/api/saveQuizResult', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' , 'Pragma': 'no-cache'},
+              cache: 'no-store',
         body: JSON.stringify(quizResult),
       })
         .then((res) => res.json())

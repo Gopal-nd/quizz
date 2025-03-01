@@ -8,6 +8,7 @@ import Providers from "./providers";
 
 export const fetchCache = 'force-no-store';
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
  
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

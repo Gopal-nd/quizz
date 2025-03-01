@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { db } from '@/lib/db'; // Adjust the path to your Prisma client if needed
 
 export const dynamic = 'force-dynamic';
-
+export const revalidate = 0;
 export async function GET() {
   try {
     // Group quiz records by userId and sum the score for each user.

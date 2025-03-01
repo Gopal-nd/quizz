@@ -1,9 +1,10 @@
 // /app/api/generate-response/route.ts
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 export const dynamic = 'force-dynamic';
 
-import type { NextRequest } from 'next/server';
+
+
 
 
 export async function POST(req: NextRequest) {
@@ -49,7 +50,12 @@ export async function POST(req: NextRequest) {
     
     
     // Assuming the result returns the complete text in `result.text`
-    return NextResponse.json({ response: result.response.text()});
+    return NextResponse.json({ response: result.response.text(), 
+      status: 201,
+      headers: {
+        'Cache-Control': 'no-store, max-age=0',
+      },
+    });
   } catch (error) {
     console.error('Error generating response:', error);
     return NextResponse.json(

@@ -33,7 +33,9 @@ export async function POST(request: NextRequest) {
       },
     });
     
-    return NextResponse.json(quizRecord, { status: 200 });
+    return NextResponse.json(quizRecord, { status: 200, headers: {
+      'Cache-Control': 'no-store, max-age=0',
+    }, });
   } catch (error) {
     console.error('Error saving quiz result:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

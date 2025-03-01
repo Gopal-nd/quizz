@@ -91,7 +91,7 @@ export default function Faq() {
   )
 }
 
-function FaqItem({ question, answer, delay, isInView }) {
+function FaqItem({ question, answer, delay, isInView }:any) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (

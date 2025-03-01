@@ -253,7 +253,7 @@ export default function HowItWorks() {
   )
 }
 
-function TopicCard({ title, color, textColor, active = false }) {
+function TopicCard({ title, color, textColor, active = false }:any) {
   return (
     <motion.div
       className={`p-4 rounded-lg cursor-pointer transition-colors ${color} ${active ? "ring-2 ring-blue-500" : ""}`}
@@ -265,7 +265,7 @@ function TopicCard({ title, color, textColor, active = false }) {
   )
 }
 
-function QuizOption({ label, text, isCorrect = false }) {
+function QuizOption({ label, text, isCorrect = false }:any) {
   return (
     <div
       className={`p-3 rounded-lg border ${isCorrect ? " border-green-200" : "border-slate-200 hover:border-slate-300"} cursor-pointer transition-colors flex items-center gap-3`}

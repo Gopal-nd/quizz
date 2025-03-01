@@ -3,6 +3,19 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useSession } from 'next-auth/react';
 
+interface QuizResult {
+  gameType?: string;
+  id?: string;
+  attempted: number;
+  score: number;
+  percentage: string;
+  time: string;
+}
+
+type QuizProps = {
+  quiz: QuizResult;
+};
+
 const Profile = () => {
   const { data: session, status } = useSession();
   const [recentQuizzes, setRecentQuizzes] = useState([]);
@@ -26,8 +39,8 @@ const Profile = () => {
       {session && session.user ? (
         <div className=" shadow rounded-lg p-4 mb-6 flex items-center space-x-4">
           <img
-            src={session.user.image}
-            alt={session.user.name}
+            src={session.user.image||''}
+            alt={session.user.name||''}
             className="w-16 h-16 rounded-full"
           />
           <div>
@@ -60,7 +73,7 @@ const Profile = () => {
           }}
           className="space-y-4 max-w-3xl mx-auto"
         >
-          {recentQuizzes.map((quiz, index) => (
+          {recentQuizzes.map((quiz:QuizResult, index) => (
             <motion.div
               key={index}
               className="p-4  border rounded-lg shadow hover:shadow-xl transition-all"
@@ -102,7 +115,7 @@ const Profile = () => {
           }}
           className="space-y-4 max-w-3xl mx-auto"
         >
-          {aiRecentQuizzes.map((quiz, index) => (
+          {aiRecentQuizzes.map((quiz:QuizResult, index) => (
             <motion.div
               key={index}
               className="p-4  border rounded-lg shadow hover:shadow-xl transition-all"

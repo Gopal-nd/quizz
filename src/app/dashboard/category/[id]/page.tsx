@@ -9,13 +9,25 @@ import { quizData } from '@/lib/data';
 import Congratulations from '@/components/Congratulations'; // Adjust the path as needed
 import { useSession } from 'next-auth/react';
 
+interface QuizQuestion {
+  question: string;
+  options: string[];
+  correct: number;
+  fact: string;
+}
 
+interface TypeQuizz {
+  physics: QuizQuestion[];
+  biology: QuizQuestion[];
+  history: QuizQuestion[];
+  chemistry: QuizQuestion[];
+}
 
 const QuizPage = ({ params }: { params: { id: string } }) => {
     const session = useSession()
     let id = params.id
   const router = useRouter();
-  const questions = quizData[id] || [];
+  const questions = quizData[id as keyof TypeQuizz] || [];
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [userAnswers, setUserAnswers] = useState<(number | null)[]>([]);
   const [score, setScore] = useState(0);

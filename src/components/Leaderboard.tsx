@@ -38,7 +38,7 @@ const Leaderboard = () => {
           animate={{ opacity: 1 }}
           className="max-w-xl mx-auto space-y-2"
         >
-          {leaderboard.map((user,index) => (
+          {leaderboard.map((user:any,index) => (
             <motion.li 
               key={user.userId}
               className="p-4  rounded-lg shadow flex justify-between items-center"

@@ -9,10 +9,10 @@ import Link from "next/link"
 import { ModeToggle } from "@/components/ThemeToggle"
 
 import { getAuthSession } from "@/lib/auth"
-import Hero from "@/components/LangingPage/components/hero"
-import Features from "@/components/LangingPage/components/features"
-import HowItWorks from "@/components/LangingPage/components/how-it-works"
-import Faq from "@/components/LangingPage/components/faq"
+import Hero from "@/components/hero"
+import Features from "@/components/features"
+import HowItWorks from "@/components/how-it-works"
+import Faq from "@/components/faq"
 
 
 export default async function LandingPage() {
@@ -45,7 +45,7 @@ const session =await getAuthSession()
    
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-muted-foreground">© 2024 Quizz. All rights reserved.</p>
+        <p className="text-xs text-muted-foreground">© 2025 Quizz. All rights reserved.</p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
           <Link className="text-xs hover:underline underline-offset-4" href="#">
             Features

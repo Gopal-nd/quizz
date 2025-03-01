@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
 import { Atom, Microscope, BookOpen, FlaskRoundIcon as Flask, Zap, Trophy, Smartphone } from "lucide-react"
+import Link from "next/link"
 
 export default function Features() {
   const ref = useRef(null)
@@ -132,7 +133,9 @@ export default function Features() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
+                <Link href={'/dashboard'}>
                 Try a Quiz Now
+                </Link>
               </motion.button>
             </div>
             <div className="md:w-1/2 flex justify-center">
@@ -171,7 +174,7 @@ export default function Features() {
   )
 }
 
-function TopicItem({ icon, title, description, variants }) {
+function TopicItem({ icon, title, description, variants }:any) {
   return (
     <motion.li variants={variants} className="flex items-start gap-4">
       <div className="mt-1">{icon}</div>
@@ -183,7 +186,7 @@ function TopicItem({ icon, title, description, variants }) {
   )
 }
 
-function FeatureCard({ icon, title, description, delay = 0 }) {
+function FeatureCard({ icon, title, description, delay = 0 }:any) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
 

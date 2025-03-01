@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Brain, Atom, Microscope, BookOpen, FlaskRoundIcon as Flask, ChevronRight } from "lucide-react"
+import Link from "next/link"
 
 export default function Hero() {
   const [activeIcon, setActiveIcon] = useState(0)
@@ -105,7 +106,10 @@ export default function Hero() {
               size="lg"
               className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700  font-medium px-8 py-6 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
             >
+              <Link
+               href="/dashboard">
               Start Quizzing
+              </Link>
               <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button
@@ -134,7 +138,7 @@ export default function Hero() {
   )
 }
 
-function QuizCard({ icon, title, color, delay = 0 }) {
+function QuizCard({ icon, title, color, delay = 0 }:any) {
   return (
     <motion.div
       className="relative group cursor-pointer"

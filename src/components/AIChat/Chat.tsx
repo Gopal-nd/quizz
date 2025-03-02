@@ -82,7 +82,7 @@ const Chat: React.FC = () => {
   }
 
   return (
-    <Card className="w-full mx-auto h-[90vh] flex flex-col">
+    <Card className="w-full mx-auto h-[70vh] flex flex-col">
       <CardHeader>
         <CardTitle>Quizz Assistent</CardTitle>
       </CardHeader>

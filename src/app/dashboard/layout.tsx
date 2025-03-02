@@ -51,7 +51,7 @@ export default function Component({ children }: { children: React.ReactNode }) {
         </Link>
         <Link href="/dashboard/games" className="flex items-center space-x-2 px-4 py-2 rounded-lg" onClick={handleLinkClick}>
           <Gamepad2  className="h-5 w-5 text-primary" />
-          <span>Games</span>
+          <span>Games</span><Badge>soon</Badge>
         </Link>
         <Link href="/dashboard/leaderboard" className="flex items-center space-x-2 px-4 py-2 rounded-lg" onClick={handleLinkClick}>
           <Medal  className="h-5 w-5 text-primary" />

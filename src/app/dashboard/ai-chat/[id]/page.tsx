@@ -34,7 +34,7 @@ const QuizPage = ({ params }: { params: { id: string } }) => {
         try {
           const body = {
             title: id,
-            description: `Generate 5 quiz questions for the category "${id}".`,
+            description: `Generate 7 quiz questions for the category "${id} ".`,
             inputValue:
               'Output as a JSON array of objects, each with keys: "question" (string), "options" (array of strings), "correct" (number, index of correct answer), and "fact" (string).',
           };
@@ -46,8 +46,7 @@ const QuizPage = ({ params }: { params: { id: string } }) => {
           });
           const data = await res.json();
 
-         
-          setQuestions(JSON.parse(data.response));
+          setQuestions(data.response);
         } catch (err) {
           console.error('Error generating questions:', err);
         } finally {

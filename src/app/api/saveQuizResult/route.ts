@@ -32,6 +32,7 @@ export async function POST(request: NextRequest) {
         percentage: parseFloat(percentage),
       },
     });
+    console.log(quizRecord)
     
     return NextResponse.json(quizRecord, { status: 200, headers: {
       'Cache-Control': 'no-store, max-age=0',

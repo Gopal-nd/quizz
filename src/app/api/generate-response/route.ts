@@ -1,35 +1,38 @@
-// /app/api/generate-response/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+
 export const dynamic = 'force-dynamic';
-
-
-
-
 
 export async function POST(req: NextRequest) {
   try {
     const { title, description, inputValue } = await req.json();
 
-    if (!title || !description) {
+    if (!title) {
       return NextResponse.json(
-        { error: 'Missing required fields: title and description are required.' },
+        { error: 'Missing required field: title.' },
         { status: 400 }
       );
     }
 
-    // Ensure API key is provided
+    // Use default description if not provided.
+    const finalDescription =
+      description || `Generate 3 quiz questions for the category "${title}".`;
+
     const apiKey = process.env.NEXT_GOOGLE_API_KEY;
     if (!apiKey) {
-      return NextResponse.json({ error: 'Missing API key.' }, { status: 500 });
+      return NextResponse.json(
+        { error: 'Missing API key.' },
+        { status: 500 }
+      );
     }
 
     // Instantiate the Gemini model from Google Generative AI
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-    // Construct a prompt that asks for a one‑time answer in simple language.
-    const prompt = `${title}: ${description}${inputValue ? ` and ${inputValue}` : ''} Ensure the difficulty increases from easy to hard. Provide only the array without any other thigs give me exactly like this formate without any changes in the formate but not that questions:
+    const prompt = `${title}: ${finalDescription}${
+      inputValue ? ` and ${inputValue}` : ''
+    } Ensure the difficulty increases from easy to hard. Provide only the array without any other things give me exactly like this format without any changes in the format but not that questions:
     eg: for the physics 
       physics: [
     { question: 'What is the SI unit of force?', options: ['Watt', 'Joule', 'Newton', 'Pascal'], correct: 2, fact: 'The SI unit of force is the Newton, named after Sir Isaac Newton.' },
@@ -40,40 +43,33 @@ export async function POST(req: NextRequest) {
 
     // Generate content in one shot rather than streaming.
     const result = await model.generateContent(prompt);
-    const  convertAIOutputToArray = (aiOutput: string )=> {
+    const text = await result.response.text();
+
+    const convertAIOutputToArray = (aiOutput: string) => {
       try {
-        // Remove unwanted backticks or markdown formatting
+        // Remove unwanted backticks or markdown formatting.
         const cleanedOutput = aiOutput
-          .replace(/```json/g, '') // Remove markdown JSON start
-          .replace(/```/g, '') // Remove markdown end
-          .trim(); // Trim extra spaces
-    
-        // Parse the cleaned JSON string into a JavaScript array
+          .replace(/```json/g, '')
+          .replace(/```/g, '')
+          .trim();
         return JSON.parse(cleanedOutput);
       } catch (error) {
-        console.error("Error parsing AI output:", error);
+        console.error('Error parsing AI output:', error);
         return [];
       }
-    }
-    const Fresult = convertAIOutputToArray(result.response.text())
-    console.log('after resfactor',Fresult)
-    // console.log(JSON.parse(result.response.text()))
-    
-    type QuizItem = {
-      question: string;
-      options: string[];
-      correct: number;
-      fact: string;
     };
-    
-    
-    // Assuming the result returns the complete text in `result.text`
-    return NextResponse.json({ response: Fresult, 
-      status: 201,
-      headers: {
-        'Cache-Control': 'no-store, max-age=0',
-      },
-    });
+    const Fresult = convertAIOutputToArray(text);
+    console.log('Parsed result:', Fresult);
+
+    return NextResponse.json(
+      { response: Fresult },
+      {
+        status: 201,
+        headers: {
+          'Cache-Control': 'no-store, max-age=0',
+        },
+      }
+    );
   } catch (error) {
     console.error('Error generating response:', error);
     return NextResponse.json(

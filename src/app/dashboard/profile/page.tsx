@@ -129,7 +129,7 @@ const Profile = () => {
               </p>
               <p>Attempted: {quiz.attempted}</p>
               <p>Correct: {quiz.score}</p>
-              <p>Percentage: {quiz.percentage}%</p>
+              <p>Percentage: {Math.round(Number(quiz.percentage))}%</p>
               <p className="text-sm text-gray-500">
                 Time: {new Date(quiz.time).toLocaleString()}
               </p>

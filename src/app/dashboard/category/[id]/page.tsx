@@ -41,6 +41,7 @@ const QuizPage = () => {
   const [score, setScore] = useState(0)
   const [attempted, setAttempted] = useState(0)
   const [quizCompleted, setQuizCompleted] = useState(false)
+  const [scoreNumber,setScoreNumber] = useState(0)
 
   // Game mechanics
   const [lives, setLives] = useState(20)
@@ -76,13 +77,13 @@ const QuizPage = () => {
   // Save quiz results
   useEffect(() => {
     if (quizCompleted) {
-      const percentage = attempted > 0 ? ((score / attempted) * 100).toFixed(2) : "0.00"
+      const percentage = scoreNumber/attempted *100;
 
       const quizResult = {
         time: new Date().toLocaleString(),
         gameType: id,
         attempted,
-        score,
+        score:scoreNumber,
         percentage,
       }
 
@@ -145,6 +146,7 @@ const QuizPage = () => {
       setScore((prev) => prev + questionPoints)
       setStreak((prev) => prev + 1)
       setShowConfetti(true)
+      setScoreNumber((prev)=>prev+1)
 
       setTimeout(() => setShowConfetti(false), 2000)
     } else {

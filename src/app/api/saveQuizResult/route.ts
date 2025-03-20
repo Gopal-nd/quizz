@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     }
     
     const { gameType, attempted, score, percentage } = await request.json();
-    
+    console.log(score,gameType,attempted,percentage)
     const user = await db.user.findUnique({
       where: { email: session.user.email },
     });

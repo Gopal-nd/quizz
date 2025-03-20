@@ -386,14 +386,7 @@ const QuizPage = () => {
                 Dashboard
               </Button>
 
-              <Button
-                onClick={() => router.push(`/quiz/ai/${id}`)}
-                variant="outline"
-                className="border-purple-500 text-purple-100 hover:bg-purple-800/30"
-              >
-                <RotateCcw className="w-4 h-4 mr-2" />
-                Play Again
-              </Button>
+           
             </motion.div>
           </Card>
         </motion.div>
